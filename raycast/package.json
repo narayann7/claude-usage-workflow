@@ -1,0 +1,78 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "claude-code-usage",
+  "title": "Claude Code Usage",
+  "description": "Live Claude Code session and weekly usage limits.",
+  "icon": "icon.png",
+  "author": "narayann7",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "usage",
+      "title": "Claude Usage",
+      "subtitle": "Claude Code",
+      "description": "List view of session and weekly usage with bars and reset times.",
+      "mode": "view"
+    },
+    {
+      "name": "usage-menubar",
+      "title": "Claude Usage Menu Bar",
+      "subtitle": "Claude Code",
+      "description": "Compact menu bar title showing weekly and session usage.",
+      "mode": "menu-bar",
+      "interval": "3m"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "userAgent",
+      "type": "textfield",
+      "title": "User-Agent Override",
+      "description": "Optional User-Agent for the usage endpoint. Leave empty to use the pinned default.",
+      "required": false,
+      "default": ""
+    },
+    {
+      "name": "cacheSeconds",
+      "type": "textfield",
+      "title": "Cache Seconds",
+      "description": "How long a successful response is cached before refetching.",
+      "required": false,
+      "default": "180"
+    },
+    {
+      "name": "titleWindows",
+      "type": "dropdown",
+      "title": "Menu Bar Title Shows",
+      "description": "Which windows appear in the menu bar title.",
+      "required": false,
+      "default": "both",
+      "data": [
+        { "title": "W + C", "value": "both" },
+        { "title": "Weekly only", "value": "w" },
+        { "title": "Session only", "value": "c" }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.99.0",
+    "@raycast/utils": "^1.19.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "prebuild": "node scripts/copy-core.mjs",
+    "predev": "node scripts/copy-core.mjs",
+    "build": "ray build",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "fix-lint": "ray lint --fix",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
