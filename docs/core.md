@@ -1,4 +1,4 @@
-# Claude Code Usage — Alfred Workflow
+# Claude Code Usage: Alfred Workflow
 
 An Alfred workflow that shows your live Claude Code usage: the rolling
 **5-hour session** and the **7-day weekly** limits, with reset times. Same
@@ -55,10 +55,10 @@ local day/time.
 Claude Code authenticates with OAuth, not an API key. The access token is
 resolved in this order:
 
-1. **macOS Keychain** — service `Claude Code-credentials`, read with
+1. **macOS Keychain**, service `Claude Code-credentials`, read with
    `security find-generic-password -s "Claude Code-credentials" -w`. The stored
    password is a JSON blob; the token is at `.claudeAiOauth.accessToken`.
-2. **Credentials file** — `~/.claude/.credentials.json`, same JSON path.
+2. **Credentials file**, `~/.claude/.credentials.json`, same JSON path.
 
 Nothing leaves your machine except the request to `api.anthropic.com`.
 
@@ -123,7 +123,7 @@ Each usage window becomes one Alfred row. The session and weekly rows are
 ## Setup
 
 1. Double-click `Claude Code Usage.alfredworkflow` to import it into Alfred.
-2. Make sure you are signed into Claude Code (`claude`) — this is the OAuth
+2. Make sure you are signed into Claude Code (`claude`), this is the OAuth
    login the token comes from, **not** an `ANTHROPIC_API_KEY`.
 3. Have Node 18+ installed and reachable (Homebrew, nvm, or bun).
 4. Type `ccu`.
@@ -147,7 +147,7 @@ Each usage window becomes one Alfred row. The session and weekly rows are
   (`oauth-2025-04-20`) are not in Anthropic's public API reference and can
   change without notice. A header bump breaks it silently until updated.
 - **Policy.** A Feb 2026 policy restricts OAuth tokens to official Anthropic
-  clients. This reads your own account data, read-only, on demand — but the
+  clients. This reads your own account data, read-only, on demand, but the
   endpoint could be locked down at any time.
 - **Weekly reset detail.** The weekly window resets on a 7-day rolling basis
   (reset time shown per response), not at a fixed calendar boundary.
@@ -158,6 +158,6 @@ Each usage window becomes one Alfred row. The session and weekly rows are
 
 [`ccusage`](https://github.com/ryoppippi/ccusage) reads local `~/.claude`
 JSONL logs and is excellent for **token/cost** breakdowns. But it estimates
-against your own history — it cannot report the official session/weekly
+against your own history, it cannot report the official session/weekly
 **limit percentages**. Those only exist server-side, behind this endpoint.
 This workflow uses the endpoint precisely to match what `/usage` shows.

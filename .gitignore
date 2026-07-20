@@ -1,0 +1,15 @@
+# Local-only planning docs, never pushed
+/plans/
+
+# OS / editor cruft
+.DS_Store
+*.log
+
+# Node / Raycast
+node_modules/
+raycast/raycast-env.d.ts
+raycast/src/lib/usage.mjs
+
+# Swift / build output
+.build/
+macos/build/

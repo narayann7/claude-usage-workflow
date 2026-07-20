@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimal open ring with a gap at the top. Coral rounded square, white ring. -->
+  <!-- Corners outside the rounded rect stay transparent (no background fill). -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#D97757"/>
+  <g transform="translate(256 256)">
+    <!-- Open ring: 54deg gap centered on top, rounded caps. -->
+    <!-- Sweep 306deg of circumference (2*pi*150 = 942.48); dash 801, gap 141.5. -->
+    <circle r="150" fill="none" stroke="#FFFFFF" stroke-width="46" stroke-linecap="round"
+            stroke-dasharray="801 141.5" transform="rotate(117)"/>
+  </g>
+</svg>
