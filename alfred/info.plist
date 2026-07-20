@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>dev.narayann.cc-usage</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>A1B2C3D4-0001-0001-0001-000000000001</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A1B2C3D4-0002-0002-0002-000000000002</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Narayan</string>
+	<key>description</key>
+	<string>Show current Claude Code 5-hour block usage via ccusage.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Claude Code Usage</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>ccu</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string>Reading Claude Code usage…</string>
+				<key>script</key>
+				<string>export PATH="$HOME/.bun/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+# Append newest nvm-installed node, if any
+if [ -d "$HOME/.nvm/versions/node" ]; then
+  NVM_NODE_DIR="$(ls -d "$HOME"/.nvm/versions/node/*/bin 2>/dev/null | sort | tail -n1)"
+  [ -n "$NVM_NODE_DIR" ] &amp;&amp; export PATH="$NVM_NODE_DIR:$PATH"
+fi
+
+NODE_BIN="$(command -v node || true)"
+if [ -z "$NODE_BIN" ]; then
+  for p in /opt/homebrew/bin/node /usr/local/bin/node "$HOME/.bun/bin/node"; do
+    [ -x "$p" ] &amp;&amp; NODE_BIN="$p" &amp;&amp; break
+  done
+fi
+
+if [ -z "$NODE_BIN" ]; then
+  echo '{"items":[{"title":"Node not found","subtitle":"Install Node (or Bun) so ccusage can run","valid":false}]}'
+  exit 0
+fi
+
+"$NODE_BIN" usage.js</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Claude Code Usage</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A1B2C3D4-0001-0001-0001-000000000001</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>A1B2C3D4-0002-0002-0002-000000000002</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Type "ccu" to see your Claude Code session + weekly usage, the same numbers as /usage.
+
+Requires Node 18+ and a Claude Code login (OAuth, not an API key). Sign in once with `claude`.
+
+Data source: GET https://api.anthropic.com/api/oauth/usage, undocumented, beta, read-only. Your OAuth token is read from the macOS Keychain, then ~/.claude/.credentials.json. Nothing is sent anywhere except Anthropic.
+
+Notes: the endpoint rate-limits hard, so results are cached ~180s. If the beta header (oauth-2025-04-20) changes, it may 401 until updated. Optional workflow variables: CC_UA (User-Agent), CC_CACHE_SECONDS.</string>
+	<key>uidata</key>
+	<dict>
+		<key>A1B2C3D4-0001-0001-0001-000000000001</key>
+		<dict>
+			<key>xpos</key>
+			<real>110</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+		<key>A1B2C3D4-0002-0002-0002-000000000002</key>
+		<dict>
+			<key>xpos</key>
+			<real>360</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>CC_CACHE_SECONDS</key>
+		<string></string>
+		<key>CC_UA</key>
+		<string></string>
+	</dict>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://narayann.dev</string>
+</dict>
+</plist>
